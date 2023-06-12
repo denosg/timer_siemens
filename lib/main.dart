@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '/screens/home_screen.dart';
 import '/themes/theme.dart';
 
+//TODO: Use Riverpod state management do display the previous timers in a separate screen
+
 void main() {
   runApp(const MyApp());
 }
