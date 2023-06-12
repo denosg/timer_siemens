@@ -2,14 +2,15 @@ import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final timerProvider = StateNotifierProvider<TimerNotifier, TimerState>((ref) {
-  return TimerNotifier();
+final timerProvider =
+    StateNotifierProvider<StopWatchNotifier, TimerState>((ref) {
+  return StopWatchNotifier();
 });
 
-class TimerNotifier extends StateNotifier<TimerState> {
+class StopWatchNotifier extends StateNotifier<TimerState> {
   Timer? _timer;
 
-  TimerNotifier() : super(TimerState()) {}
+  StopWatchNotifier() : super(TimerState()) {}
 
   // start timer function ->
   void startTimer() {

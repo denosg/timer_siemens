@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:timer_siemens/widgets/logic_button.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class StopWatchScreen extends StatelessWidget {
+  const StopWatchScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
