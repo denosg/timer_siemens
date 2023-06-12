@@ -42,7 +42,7 @@ class StopWatchScreen extends ConsumerWidget {
                   child: Text(
                 '${timerState.displayHour}:${timerState.displayMin}:${timerState.displaySec}',
                 style: TextStyle(
-                  color: colors.tertiary,
+                  color: colors.secondary,
                   fontSize: 80,
                   fontWeight: FontWeight.w600,
                 ),
@@ -80,7 +80,7 @@ class StopWatchScreen extends ConsumerWidget {
                   IconButton(
                     // TODO: add functionality here ->
                     onPressed: () {},
-                    color: Colors.white,
+                    color: colors.secondary,
                     icon: const Icon(Icons.flag),
                   ),
                   SizedBox(width: width * 0.02),

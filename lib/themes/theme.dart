@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:timer_siemens/models/custom_material_color.dart';
 
 class AppTheme {
   // light theme
   static ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
-    primarySwatch: Colors.deepPurple,
-    colorScheme: ColorScheme.light(
-      primary: Colors.deepPurple,
-      secondary: Colors.white70,
-      tertiary: Colors.purple[100],
+    colorScheme: const ColorScheme.light(
+      primary: Colors.white,
+      secondary: Colors.black,
+      tertiary: Colors.white60,
     ),
     pageTransitionsTheme: const PageTransitionsTheme(
       builders: {
@@ -21,9 +21,9 @@ class AppTheme {
   static ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
     colorScheme: ColorScheme.dark(
-      primary: Colors.deepOrange,
-      secondary: Colors.black54,
-      tertiary: Colors.orange[100],
+      primary: createMaterialColor(const Color.fromRGBO(15, 41, 74, 1)),
+      secondary: Colors.white70,
+      tertiary: createMaterialColor(const Color.fromRGBO(30, 154, 204, 1)),
     ),
     pageTransitionsTheme: const PageTransitionsTheme(
       builders: {
