@@ -11,7 +11,7 @@ class HomeScreen extends StatelessWidget {
     final ColorScheme colors = Theme.of(context).colorScheme;
 
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.primary,
+      backgroundColor: colors.primary,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -24,7 +24,7 @@ class HomeScreen extends StatelessWidget {
                 child: Text(
                   "Timer",
                   style: TextStyle(
-                    color: Theme.of(context).colorScheme.secondary,
+                    color: colors.secondary,
                     fontSize: 28.0,
                     fontWeight: FontWeight.bold,
                   ),
@@ -36,7 +36,7 @@ class HomeScreen extends StatelessWidget {
                 // half the size of the screen
                 height: height * 0.5,
                 decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.tertiary,
+                  color: colors.tertiary,
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
@@ -51,13 +51,11 @@ class HomeScreen extends StatelessWidget {
                       // TODO: add functionality here ->
                       onPressed: () {},
                       shape: StadiumBorder(
-                        side: BorderSide(
-                            color: Theme.of(context).colorScheme.tertiary),
+                        side: BorderSide(color: colors.tertiary),
                       ),
                       child: Text(
                         "start",
-                        style: TextStyle(
-                            color: Theme.of(context).colorScheme.secondary),
+                        style: TextStyle(color: colors.secondary),
                       ),
                     ),
                   ),
@@ -67,13 +65,11 @@ class HomeScreen extends StatelessWidget {
                       // TODO: add functionality here ->
                       onPressed: () {},
                       shape: StadiumBorder(
-                        side: BorderSide(
-                            color: Theme.of(context).colorScheme.tertiary),
+                        side: BorderSide(color: colors.tertiary),
                       ),
                       child: Text(
                         "reset",
-                        style: TextStyle(
-                            color: Theme.of(context).colorScheme.secondary),
+                        style: TextStyle(color: colors.secondary),
                       ),
                     ),
                   ),
