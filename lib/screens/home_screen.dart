@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:timer_siemens/widgets/logic_button.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -46,32 +47,16 @@ class HomeScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   // start button ->
-                  Expanded(
-                    child: RawMaterialButton(
-                      // TODO: add functionality here ->
-                      onPressed: () {},
-                      shape: StadiumBorder(
-                        side: BorderSide(color: colors.tertiary),
-                      ),
-                      child: Text(
-                        "start",
-                        style: TextStyle(color: colors.secondary),
-                      ),
-                    ),
+                  LogicButton(
+                    text: "start",
+                    // TODO: add functionality here ->
+                    callBackFunc: () {},
                   ),
                   // reset button ->
-                  Expanded(
-                    child: RawMaterialButton(
-                      // TODO: add functionality here ->
-                      onPressed: () {},
-                      shape: StadiumBorder(
-                        side: BorderSide(color: colors.tertiary),
-                      ),
-                      child: Text(
-                        "reset",
-                        style: TextStyle(color: colors.secondary),
-                      ),
-                    ),
+                  LogicButton(
+                    text: "reset",
+                    // TODO: add functionality here ->
+                    callBackFunc: () {},
                   ),
                 ],
               )
