@@ -31,7 +31,17 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: height * 0.02),
+              // Timer
+              Center(
+                  child: Text(
+                "00:00:00",
+                style: TextStyle(
+                  color: colors.tertiary,
+                  fontSize: 80,
+                  fontWeight: FontWeight.w600,
+                ),
+              )),
               // TODO: write doc here ->
               Container(
                 // half the size of the screen
@@ -42,7 +52,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               // buttons area for using the timer ->
-              const SizedBox(height: 20),
+              SizedBox(height: height * 0.02),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -52,6 +62,15 @@ class HomeScreen extends StatelessWidget {
                     // TODO: add functionality here ->
                     callBackFunc: () {},
                   ),
+                  // lap button ->
+                  SizedBox(width: width * 0.02),
+                  IconButton(
+                    // TODO: add functionality here ->
+                    onPressed: () {},
+                    color: Colors.white,
+                    icon: const Icon(Icons.flag),
+                  ),
+                  SizedBox(width: width * 0.02),
                   // reset button ->
                   LogicButton(
                     text: "reset",

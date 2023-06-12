@@ -5,10 +5,10 @@ class AppTheme {
   static ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
     primarySwatch: Colors.deepPurple,
-    colorScheme: const ColorScheme.light(
+    colorScheme: ColorScheme.light(
       primary: Colors.deepPurple,
       secondary: Colors.white70,
-      tertiary: Colors.purple,
+      tertiary: Colors.purple[100],
     ),
     pageTransitionsTheme: const PageTransitionsTheme(
       builders: {
@@ -20,10 +20,10 @@ class AppTheme {
   // dark theme
   static ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
-    colorScheme: const ColorScheme.dark(
+    colorScheme: ColorScheme.dark(
       primary: Colors.deepOrange,
       secondary: Colors.black54,
-      tertiary: Colors.orange,
+      tertiary: Colors.orange[100],
     ),
     pageTransitionsTheme: const PageTransitionsTheme(
       builders: {
