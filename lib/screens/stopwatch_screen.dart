@@ -40,7 +40,7 @@ class StopWatchScreen extends ConsumerWidget {
               // Timer
               Center(
                   child: Text(
-                '${timerState.started}',
+                '${timerState.displayHour}:${timerState.displayMin}:${timerState.displaySec}',
                 style: TextStyle(
                   color: colors.tertiary,
                   fontSize: 80,
@@ -71,6 +71,8 @@ class StopWatchScreen extends ConsumerWidget {
                       } else {
                         ref.read(stopwatchProvider.notifier).startTimer();
                       }
+                      print(
+                          '${timerState.displayHour}:${timerState.displayMin}:${timerState.displaySec}');
                     },
                   ),
                   // lap button ->

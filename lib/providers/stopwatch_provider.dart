@@ -18,7 +18,33 @@ class StopWatchNotifier extends StateNotifier<StopWatchState> {
 
     state = state.copyWith(started: true);
     _timer = Timer.periodic(const Duration(seconds: 1), (_) {
-      state = state.copyWith(seconds: state.seconds + 1);
+      int localSeconds = state.seconds + 1;
+      int localMinutes = state.minutes;
+      int localHour = state.hours;
+
+      if (localSeconds > 59) {
+        if (localMinutes > 59) {
+          localHour++;
+          localMinutes = 0;
+        } else {
+          localMinutes++;
+          localSeconds = 0;
+        }
+      }
+      String showSec =
+          (localSeconds >= 10) ? "$localSeconds" : "0$localSeconds";
+      String showMin =
+          (localMinutes >= 10) ? "$localMinutes" : "0$localMinutes";
+      String showHour = (localHour >= 10) ? "$localHour" : "0$localHour";
+
+      state = state.copyWith(
+        seconds: localSeconds,
+        minutes: localMinutes,
+        hours: localHour,
+        displayHour: showHour,
+        displayMin: showMin,
+        displaySec: showSec,
+      );
     });
   }
 
