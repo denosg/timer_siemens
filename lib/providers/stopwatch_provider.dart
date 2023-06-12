@@ -2,15 +2,15 @@ import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final timerProvider =
-    StateNotifierProvider<StopWatchNotifier, TimerState>((ref) {
+final stopwatchProvider =
+    StateNotifierProvider<StopWatchNotifier, StopWatchState>((ref) {
   return StopWatchNotifier();
 });
 
-class StopWatchNotifier extends StateNotifier<TimerState> {
+class StopWatchNotifier extends StateNotifier<StopWatchState> {
   Timer? _timer;
 
-  StopWatchNotifier() : super(TimerState()) {}
+  StopWatchNotifier() : super(StopWatchState());
 
   // start timer function ->
   void startTimer() {
@@ -31,7 +31,7 @@ class StopWatchNotifier extends StateNotifier<TimerState> {
   // reset timer function ->
   void resetTimer() {
     _timer?.cancel();
-    state = TimerState();
+    state = StopWatchState();
   }
 
   // lap function ->
@@ -41,7 +41,7 @@ class StopWatchNotifier extends StateNotifier<TimerState> {
   }
 }
 
-class TimerState {
+class StopWatchState {
   final int seconds;
   final int minutes;
   final int hours;
@@ -51,7 +51,7 @@ class TimerState {
   final bool started;
   final List<String> laps;
 
-  TimerState({
+  StopWatchState({
     this.seconds = 0,
     this.minutes = 0,
     this.hours = 0,
@@ -62,7 +62,7 @@ class TimerState {
     this.laps = const [],
   });
 
-  TimerState copyWith({
+  StopWatchState copyWith({
     int? seconds,
     int? minutes,
     int? hours,
@@ -72,7 +72,7 @@ class TimerState {
     bool? started,
     List<String>? laps,
   }) {
-    return TimerState(
+    return StopWatchState(
       seconds: seconds ?? this.seconds,
       minutes: minutes ?? this.minutes,
       hours: hours ?? this.hours,

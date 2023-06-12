@@ -1,13 +1,16 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:timer_siemens/widgets/logic_button.dart';
 
-class StopWatchScreen extends StatelessWidget {
+import '../providers/stopwatch_provider.dart';
+
+class StopWatchScreen extends ConsumerWidget {
   const StopWatchScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final timerState = ref.watch(stopwatchProvider);
+
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
 
@@ -25,7 +28,7 @@ class StopWatchScreen extends StatelessWidget {
               // Center Title of app
               Center(
                 child: Text(
-                  "Timer",
+                  "Stopwatch",
                   style: TextStyle(
                     color: colors.secondary,
                     fontSize: 28.0,
@@ -37,14 +40,14 @@ class StopWatchScreen extends StatelessWidget {
               // Timer
               Center(
                   child: Text(
-                "00:00:00",
+                '${timerState.started}',
                 style: TextStyle(
                   color: colors.tertiary,
                   fontSize: 80,
                   fontWeight: FontWeight.w600,
                 ),
               )),
-              // TODO: write doc here ->
+              // TODO: write laps here
               Container(
                 // half the size of the screen
                 height: height * 0.5,
@@ -60,9 +63,15 @@ class StopWatchScreen extends StatelessWidget {
                 children: [
                   // start button ->
                   LogicButton(
-                    text: "start",
+                    text: timerState.started ? 'stop' : 'start',
                     // TODO: add functionality here ->
-                    callBackFunc: () {},
+                    callBackFunc: () {
+                      if (timerState.started) {
+                        ref.read(stopwatchProvider.notifier).stopTimer();
+                      } else {
+                        ref.read(stopwatchProvider.notifier).startTimer();
+                      }
+                    },
                   ),
                   // lap button ->
                   SizedBox(width: width * 0.02),
@@ -76,8 +85,9 @@ class StopWatchScreen extends StatelessWidget {
                   // reset button ->
                   LogicButton(
                     text: "reset",
-                    // TODO: add functionality here ->
-                    callBackFunc: () {},
+                    callBackFunc: () {
+                      ref.read(stopwatchProvider.notifier).resetTimer();
+                    },
                   ),
                 ],
               )

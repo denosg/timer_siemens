@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'screens/stopwatch_screen.dart';
 import '/themes/theme.dart';
@@ -6,7 +7,7 @@ import '/themes/theme.dart';
 //TODO: Use Riverpod state management do display the previous timers in a separate screen
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
