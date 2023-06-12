@@ -5,8 +5,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+    final double height = MediaQuery.of(context).size.height;
+    final double width = MediaQuery.of(context).size.width;
+
+    final ColorScheme colors = Theme.of(context).colorScheme;
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
@@ -29,8 +31,54 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-
-              Container()
+              // TODO: write doc here ->
+              Container(
+                // half the size of the screen
+                height: height * 0.5,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.tertiary,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              // buttons area for using the timer ->
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  // start button ->
+                  Expanded(
+                    child: RawMaterialButton(
+                      // TODO: add functionality here ->
+                      onPressed: () {},
+                      shape: StadiumBorder(
+                        side: BorderSide(
+                            color: Theme.of(context).colorScheme.tertiary),
+                      ),
+                      child: Text(
+                        "start",
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.secondary),
+                      ),
+                    ),
+                  ),
+                  // reset button ->
+                  Expanded(
+                    child: RawMaterialButton(
+                      // TODO: add functionality here ->
+                      onPressed: () {},
+                      shape: StadiumBorder(
+                        side: BorderSide(
+                            color: Theme.of(context).colorScheme.tertiary),
+                      ),
+                      child: Text(
+                        "reset",
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.secondary),
+                      ),
+                    ),
+                  ),
+                ],
+              )
             ],
           ),
         ),
