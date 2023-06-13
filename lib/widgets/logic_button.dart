@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class LogicButton extends StatelessWidget {
   final String text;
+  // call back function pointer for the button to work from different screens ->
   final Function() callBackFunc;
   const LogicButton(
       {super.key, required this.text, required this.callBackFunc});
@@ -12,7 +13,6 @@ class LogicButton extends StatelessWidget {
 
     return Expanded(
       child: ElevatedButton(
-        // TODO: add functionality here ->
         onPressed: callBackFunc,
         style: ElevatedButton.styleFrom(
             backgroundColor: colors.tertiary,

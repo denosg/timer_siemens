@@ -38,17 +38,17 @@ class StopWatchScreen extends ConsumerWidget {
                 ),
               ),
               SizedBox(height: height * 0.02),
-              // Timer
+              // Stopwatch seconds
               Center(
-                  child: Text(
-                '${timerState.displayHour}:${timerState.displayMin}:${timerState.displaySec}',
-                style: TextStyle(
-                  color: colors.secondary,
-                  fontSize: 80,
-                  fontWeight: FontWeight.w600,
+                child: Text(
+                  '${timerState.displayHour}:${timerState.displayMin}:${timerState.displaySec}',
+                  style: TextStyle(
+                    color: colors.secondary,
+                    fontSize: 80,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
-              )),
-              // TODO: write laps here
+              ),
               Container(
                 // half the size of the screen
                 height: height * 0.5,
@@ -70,23 +70,19 @@ class StopWatchScreen extends ConsumerWidget {
                   // start button ->
                   LogicButton(
                     text: timerState.started ? 'stop' : 'start',
-                    // TODO: add functionality here ->
                     callBackFunc: () {
                       if (timerState.started) {
                         ref.read(stopwatchProvider.notifier).stopTimer();
                       } else {
                         ref.read(stopwatchProvider.notifier).startTimer();
                       }
-                      print(
-                          '${timerState.displayHour}:${timerState.displayMin}:${timerState.displaySec}');
                     },
                   ),
                   // lap button ->
                   SizedBox(width: width * 0.02),
                   IconButton(
-                    onPressed: () {
-                      ref.read(stopwatchProvider.notifier).addLap();
-                    },
+                    // reads the stopwatchProvider method for adding the lap in the list ->
+                    onPressed: ref.read(stopwatchProvider.notifier).addLap,
                     color: colors.secondary,
                     icon: const Icon(Icons.flag),
                   ),
@@ -94,9 +90,9 @@ class StopWatchScreen extends ConsumerWidget {
                   // reset button ->
                   LogicButton(
                     text: "reset",
-                    callBackFunc: () {
-                      ref.read(stopwatchProvider.notifier).resetTimer();
-                    },
+                    // reads the stopwatchProvider method for resetting the stopwatch ->
+                    callBackFunc:
+                        ref.read(stopwatchProvider.notifier).resetTimer,
                   ),
                 ],
               )
