@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 
-class LapWidget extends StatelessWidget {
+class LapWidget extends StatefulWidget {
   final String time;
   final int index;
   const LapWidget({super.key, required this.time, required this.index});
 
+  @override
+  State<LapWidget> createState() => _LapWidgetState();
+}
+
+class _LapWidgetState extends State<LapWidget> {
   @override
   Widget build(BuildContext context) {
     final ColorScheme colors = Theme.of(context).colorScheme;
@@ -17,14 +22,14 @@ class LapWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Text(
-                'Lap: ${index + 1}: ',
+                'Lap: ${widget.index + 1}: ',
                 style: TextStyle(
                   color: colors.secondary,
                   fontSize: 16.0,
                 ),
               ),
               Text(
-                time,
+                widget.time,
                 style: TextStyle(
                   color: colors.secondary,
                   fontSize: 16.0,
