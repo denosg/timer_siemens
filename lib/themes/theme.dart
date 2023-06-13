@@ -21,9 +21,9 @@ class AppTheme {
   static ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
     colorScheme: ColorScheme.dark(
-      primary: createMaterialColor(const Color.fromRGBO(15, 41, 74, 1)),
+      primary: createMaterialColor(const Color.fromRGBO(1, 3, 7, 1)),
       secondary: Colors.white70,
-      tertiary: createMaterialColor(const Color.fromRGBO(30, 154, 204, 1)),
+      tertiary: createMaterialColor(const Color.fromRGBO(10, 14, 18, 1)),
     ),
     pageTransitionsTheme: const PageTransitionsTheme(
       builders: {

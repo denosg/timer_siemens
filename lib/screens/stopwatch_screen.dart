@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:timer_siemens/widgets/lap_widget.dart';
 import 'package:timer_siemens/widgets/logic_button.dart';
 
 import '../providers/stopwatch_provider.dart';
@@ -52,8 +53,13 @@ class StopWatchScreen extends ConsumerWidget {
                 // half the size of the screen
                 height: height * 0.5,
                 decoration: BoxDecoration(
-                  color: colors.tertiary,
                   borderRadius: BorderRadius.circular(10),
+                  color: colors.tertiary,
+                ),
+                child: ListView.builder(
+                  itemBuilder: (context, index) =>
+                      LapWidget(time: timerState.laps[index], index: index),
+                  itemCount: timerState.laps.length,
                 ),
               ),
               // buttons area for using the timer ->
@@ -78,8 +84,9 @@ class StopWatchScreen extends ConsumerWidget {
                   // lap button ->
                   SizedBox(width: width * 0.02),
                   IconButton(
-                    // TODO: add functionality here ->
-                    onPressed: () {},
+                    onPressed: () {
+                      ref.read(stopwatchProvider.notifier).addLap();
+                    },
                     color: colors.secondary,
                     icon: const Icon(Icons.flag),
                   ),
