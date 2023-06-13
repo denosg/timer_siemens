@@ -5,10 +5,10 @@ class AppTheme {
   // light theme
   static ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
-    colorScheme: const ColorScheme.light(
+    colorScheme: ColorScheme.light(
       primary: Colors.white,
       secondary: Colors.black,
-      tertiary: Colors.white60,
+      tertiary: createMaterialColor(const Color.fromRGBO(226, 229, 222, 1)),
     ),
     pageTransitionsTheme: const PageTransitionsTheme(
       builders: {
