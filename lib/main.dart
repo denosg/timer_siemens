@@ -27,7 +27,9 @@ class MyApp extends StatelessWidget {
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.system,
       home: const StopWatchScreen(),
-      routes: {},
+      routes: {
+        StopWatchScreen.routeName: (context) => const StopWatchScreen(),
+      },
     );
   }
 }

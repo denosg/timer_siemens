@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:timer_siemens/widgets/custom_drawer.dart';
 import 'package:timer_siemens/widgets/lap_widget.dart';
 import 'package:timer_siemens/widgets/logic_button.dart';
 
 import '../providers/stopwatch_provider.dart';
 
 class StopWatchScreen extends ConsumerWidget {
+  static const routeName = 'stopwatch-screen';
+
   const StopWatchScreen({super.key});
 
   @override
@@ -18,6 +21,12 @@ class StopWatchScreen extends ConsumerWidget {
     final ColorScheme colors = Theme.of(context).colorScheme;
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        iconTheme: IconThemeData(color: colors.secondary),
+      ),
+      drawer: const CustomDrawer(),
       backgroundColor: colors.primary,
       body: SafeArea(
         child: Padding(
