@@ -23,8 +23,10 @@ class CustomDrawer extends StatelessWidget {
             leading: const Icon(Icons.run_circle),
             title: const Text('Stopwatch'),
             onTap: () {
-              Navigator.of(context).pushNamed(StopWatchScreen.routeName);
+              // close drawer
               Navigator.of(context).pop();
+              // load stopwatch screen
+              Navigator.of(context).pushNamed(StopWatchScreen.routeName);
             },
           ),
           Padding(
@@ -38,8 +40,10 @@ class CustomDrawer extends StatelessWidget {
             leading: const Icon(Icons.timer),
             title: const Text('Timer'),
             onTap: () {
-              Navigator.of(context).pushNamed(TimerScreen.routeName);
+              // close drawer
               Navigator.of(context).pop();
+              // load timer screen
+              Navigator.of(context).pushNamed(TimerScreen.routeName);
             },
           ),
         ],

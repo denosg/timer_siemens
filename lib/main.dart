@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:timer_siemens/screens/timer_screen.dart';
 
 import 'screens/stopwatch_screen.dart';
 import '/themes/theme.dart';
@@ -28,7 +29,10 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.system,
       home: const StopWatchScreen(),
       routes: {
+        // Stopwatch Screen
         StopWatchScreen.routeName: (context) => const StopWatchScreen(),
+        // Timer Screen
+        TimerScreen.routeName: (context) => const TimerScreen(),
       },
     );
   }
