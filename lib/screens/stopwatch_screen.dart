@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:timer_siemens/widgets/custom_drawer.dart';
-import 'package:timer_siemens/widgets/lap_widget.dart';
-import 'package:timer_siemens/widgets/logic_button.dart';
+import 'package:timer_siemens/widgets/stopwatch/logic_button.dart';
 
 import '../providers/stopwatch_provider.dart';
+import '../widgets/stopwatch/lap_widget.dart';
 
 class StopWatchScreen extends ConsumerWidget {
   static const routeName = 'stopwatch-screen';

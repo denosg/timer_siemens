@@ -18,6 +18,7 @@ class StopWatchNotifier extends StateNotifier<StopWatchState> {
 
     state = state.copyWith(started: true);
     _timer = Timer.periodic(const Duration(seconds: 1), (_) {
+      // we add 1 second for the stopwatch
       int localSeconds = state.seconds + 1;
       int localMinutes = state.minutes;
       int localHour = state.hours;
