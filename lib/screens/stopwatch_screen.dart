@@ -13,7 +13,7 @@ class StopWatchScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final timerState = ref.watch(stopwatchProvider);
+    final stopwatchState = ref.watch(stopwatchProvider);
 
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
@@ -50,7 +50,7 @@ class StopWatchScreen extends ConsumerWidget {
               // Stopwatch seconds
               Center(
                 child: Text(
-                  '${timerState.displayHour}:${timerState.displayMin}:${timerState.displaySec}',
+                  '${stopwatchState.displayHour}:${stopwatchState.displayMin}:${stopwatchState.displaySec}',
                   style: TextStyle(
                     color: colors.secondary,
                     fontSize: 80,
@@ -67,8 +67,8 @@ class StopWatchScreen extends ConsumerWidget {
                 ),
                 child: ListView.builder(
                   itemBuilder: (context, index) =>
-                      LapWidget(time: timerState.laps[index], index: index),
-                  itemCount: timerState.laps.length,
+                      LapWidget(time: stopwatchState.laps[index], index: index),
+                  itemCount: stopwatchState.laps.length,
                 ),
               ),
               // buttons area for using the timer ->
@@ -78,9 +78,9 @@ class StopWatchScreen extends ConsumerWidget {
                 children: [
                   // start button ->
                   LogicButton(
-                    text: timerState.started ? 'stop' : 'start',
+                    text: stopwatchState.started ? 'stop' : 'start',
                     callBackFunc: () {
-                      if (timerState.started) {
+                      if (stopwatchState.started) {
                         ref.read(stopwatchProvider.notifier).stopTimer();
                       } else {
                         ref.read(stopwatchProvider.notifier).startTimer();

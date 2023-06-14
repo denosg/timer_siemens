@@ -10,6 +10,7 @@ class CustomDrawer extends StatelessWidget {
     final ColorScheme colors = Theme.of(context).colorScheme;
 
     return Drawer(
+      backgroundColor: colors.tertiary,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadiusDirectional.circular(10)),
       child: Column(
