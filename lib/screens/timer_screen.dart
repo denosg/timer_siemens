@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:timer_siemens/widgets/timer/choose_timer.dart';
 
+import '../widgets/timer/choose_timer.dart';
+import '../widgets/timer/new_timer.dart';
 import '../providers/timer_provider.dart';
 import '../widgets/custom_drawer.dart';
 import '../widgets/timer/timer_button.dart';
@@ -18,11 +19,41 @@ class TimerScreen extends ConsumerWidget {
 
     final ColorScheme colors = Theme.of(context).colorScheme;
 
+    // modal bottoom sheet when entering new item in the list
+    void startAddNewtimer(BuildContext context) {
+      showModalBottomSheet(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        context: context,
+        builder: (context) => const NewTimer(),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         iconTheme: IconThemeData(color: colors.secondary),
+        actions: [
+          // add a favorite preset
+          PopupMenuButton(
+            offset: const Offset(0, 20),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadiusDirectional.circular(10)),
+            itemBuilder: (context) => [
+              const PopupMenuItem(
+                value: 'addTimer',
+                child: Text('Add a preset timer'),
+              ),
+            ],
+            onSelected: (value) {
+              if (value == 'addTimer') {
+                startAddNewtimer(context);
+              }
+            },
+          ),
+        ],
       ),
       backgroundColor: colors.primary,
       drawer: const CustomDrawer(),

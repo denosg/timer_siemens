@@ -34,26 +34,33 @@ class CountdownNotifier extends StateNotifier<CountdownState> {
 
     state = state.copyWith(started: true);
     _timer = Timer.periodic(const Duration(seconds: 1), (_) {
+      int localSeconds = state.seconds;
+      int localMinutes = state.minutes;
+      int localHour = state.hours;
+      // add all seconds to see how much total seconds we have
+      int totalSeconds = localSeconds + localMinutes * 60 + localHour * 3600;
+      print("sec $totalSeconds");
+      // we substract here 1 second for the countdown
+      totalSeconds--;
       // verifies if we have reached the end
-      if (state.seconds == 0 && state.minutes == 0 && state.hours == 0) {
-        state = state.copyWith(started: false);
+      if (totalSeconds == 0) {
+        //if we reach the end, we start with the 30 min again if the user just presses it again (bug fix)
+        state = state.copyWith(
+            started: false,
+            minutes: 30,
+            displayMin: '30',
+            seconds: 0,
+            displaySec: '00');
         _timer!.cancel();
         return;
       }
-      // we substract here 1 second for the countdown
-      int localSeconds = state.seconds - 1;
-      int localMinutes = state.minutes;
-      int localHour = state.hours;
 
-      if (localSeconds > 59) {
-        if (localMinutes > 59) {
-          localHour++;
-          localMinutes = 0;
-        } else {
-          localMinutes++;
-          localSeconds = 0;
-        }
-      }
+      //attribute the hours, minutes and remaining seconds from the total seconds
+      localHour = totalSeconds ~/ 3600; // efective integer definition
+      int remainingSeconds = totalSeconds % 3600;
+      localMinutes = (remainingSeconds ~/ 60);
+      localSeconds = remainingSeconds % 60;
+
       String showSec =
           (localSeconds >= 10) ? "$localSeconds" : "0$localSeconds";
       String showMin =
