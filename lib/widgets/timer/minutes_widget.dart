@@ -11,15 +11,13 @@ class MinuntesWidget extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5.0),
-      child: Container(
-        child: Center(
-          child: Text(
-            minutes < 10 ? '0$minutes' : minutes.toString(),
-            style: TextStyle(
-              fontSize: 40,
-              color: colors.secondary,
-              fontWeight: FontWeight.bold,
-            ),
+      child: Center(
+        child: Text(
+          minutes < 10 ? '0$minutes' : minutes.toString(),
+          style: TextStyle(
+            fontSize: 40,
+            color: colors.secondary,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),

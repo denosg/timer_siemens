@@ -6,8 +6,6 @@ import 'package:timer_siemens/screens/timer_screen.dart';
 import 'screens/stopwatch_screen.dart';
 import '/themes/theme.dart';
 
-//TODO: Use Riverpod state management do display the previous timers in a separate screen
-
 void main() {
   //Makes it so SystemChrome.setPreferredOrientations works
   WidgetsFlutterBinding.ensureInitialized();

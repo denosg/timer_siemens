@@ -11,10 +11,10 @@ class TimerScreen extends ConsumerStatefulWidget {
   const TimerScreen({super.key});
 
   @override
-  _TimerScreenState createState() => _TimerScreenState();
+  TimerScreenState createState() => TimerScreenState();
 }
 
-class _TimerScreenState extends ConsumerState<TimerScreen> {
+class TimerScreenState extends ConsumerState<TimerScreen> {
   late FixedExtentScrollController _secondsController;
   late FixedExtentScrollController _minutesController;
   late FixedExtentScrollController _hoursController;
