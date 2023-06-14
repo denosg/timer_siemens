@@ -38,7 +38,18 @@ class TimerScreen extends ConsumerWidget {
                 color: colors.tertiary,
               ),
               height: height * 0.5,
-              child: const ChooseTimer(),
+              child: !timerState.started
+                  ? const ChooseTimer()
+                  : Center(
+                      child: Text(
+                        '${timerState.displayHour}:${timerState.displayMin}:${timerState.displaySec}',
+                        style: TextStyle(
+                          color: colors.secondary,
+                          fontSize: 40,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
             ),
             // buttons for timer
             const TimerButton(),

@@ -32,13 +32,14 @@ class CountdownNotifier extends StateNotifier<CountdownState> {
   void startCountdown() {
     if (state.started) return;
 
-    if (state.seconds < 0) {
-      _timer!.cancel();
-      return;
-    }
-
     state = state.copyWith(started: true);
     _timer = Timer.periodic(const Duration(seconds: 1), (_) {
+      // verifies if we have reached the end
+      if (state.seconds == 0 && state.minutes == 0 && state.hours == 0) {
+        state = state.copyWith(started: false);
+        _timer!.cancel();
+        return;
+      }
       // we substract here 1 second for the countdown
       int localSeconds = state.seconds - 1;
       int localMinutes = state.minutes;

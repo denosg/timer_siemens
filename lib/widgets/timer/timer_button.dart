@@ -25,7 +25,9 @@ class TimerButton extends ConsumerWidget {
                     color: colors.tertiary),
                 child: IconButton(
                   // stop timer metod
-                  onPressed: () {},
+                  onPressed: () {
+                    ref.read(countdownProvider.notifier).resetCountdown();
+                  },
                   icon: const Icon(Icons.stop, size: 32),
                 ),
               ),
@@ -39,7 +41,9 @@ class TimerButton extends ConsumerWidget {
                 ),
                 child: IconButton(
                   // pause timer metod
-                  onPressed: () {},
+                  onPressed: () {
+                    ref.read(countdownProvider.notifier).stopCountdown();
+                  },
                   icon: const Icon(Icons.pause, size: 32),
                 ),
               ),
@@ -55,9 +59,7 @@ class TimerButton extends ConsumerWidget {
             child: IconButton(
               // start timer metod
               onPressed: () {
-                print("hours: " + timerState.displayHour);
-                print("min: " + timerState.displayMin);
-                print("sec: " + timerState.displaySec);
+                ref.read(countdownProvider.notifier).startCountdown();
               },
               icon: const Icon(Icons.play_circle_filled, size: 32),
             ),
