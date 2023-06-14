@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
+import 'package:timer_siemens/providers/timer_provider.dart';
 import 'package:timer_siemens/widgets/timer/seconds_widget.dart';
 
 import 'hours_widget.dart';
@@ -28,6 +29,7 @@ class ChooseTimerState extends ConsumerState<ChooseTimer> {
 
   @override
   Widget build(BuildContext context) {
+    final timerState = ref.watch(countdownProvider);
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
 
@@ -80,6 +82,8 @@ class ChooseTimerState extends ConsumerState<ChooseTimer> {
               width: width * 0.2,
               child: ListWheelScrollView.useDelegate(
                 controller: _hoursController,
+                onSelectedItemChanged: (hours) =>
+                    ref.read(countdownProvider.notifier).setHours(hours),
                 itemExtent: 50,
                 perspective: 0.008,
                 diameterRatio: 1.2,
@@ -103,6 +107,8 @@ class ChooseTimerState extends ConsumerState<ChooseTimer> {
               height: height * 0.4,
               width: width * 0.2,
               child: ListWheelScrollView.useDelegate(
+                onSelectedItemChanged: (minutes) =>
+                    ref.read(countdownProvider.notifier).setMinutes(minutes),
                 controller: _minutesController,
                 itemExtent: 50,
                 perspective: 0.008,
@@ -127,6 +133,8 @@ class ChooseTimerState extends ConsumerState<ChooseTimer> {
               height: height * 0.4,
               width: width * 0.2,
               child: ListWheelScrollView.useDelegate(
+                onSelectedItemChanged: (seconds) =>
+                    ref.read(countdownProvider.notifier).setSeconds(seconds),
                 controller: _secondsController,
                 itemExtent: 50,
                 perspective: 0.008,

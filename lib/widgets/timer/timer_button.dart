@@ -54,7 +54,11 @@ class TimerButton extends ConsumerWidget {
             ),
             child: IconButton(
               // start timer metod
-              onPressed: () {},
+              onPressed: () {
+                print("hours: " + timerState.displayHour);
+                print("min: " + timerState.displayMin);
+                print("sec: " + timerState.displaySec);
+              },
               icon: const Icon(Icons.play_circle_filled, size: 32),
             ),
           );

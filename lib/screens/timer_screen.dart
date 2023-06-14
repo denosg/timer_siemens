@@ -41,7 +41,7 @@ class TimerScreen extends ConsumerWidget {
               child: const ChooseTimer(),
             ),
             // buttons for timer
-            TimerButton(),
+            const TimerButton(),
           ],
         ),
       ),
