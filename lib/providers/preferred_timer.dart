@@ -48,11 +48,11 @@ class PreferredTimer {
 class PreferredTimerNotifier extends StateNotifier<List<PreferredTimer>> {
   PreferredTimerNotifier() : super([]) {
     // load the preferredtimers from phone memory (if there are any)
-    _loadPreferredTimers();
+    loadPreferredTimers();
   }
 
   // method for loading the preferredtimers
-  Future<void> _loadPreferredTimers() async {
+  Future<void> loadPreferredTimers() async {
     final timers = await DatabaseHelper.instance.getPreferredTimers();
     // updating the state of the timers in the local memory
     state = timers;

@@ -1,51 +1,131 @@
 import 'package:flutter/material.dart';
-import 'package:timer_siemens/widgets/timer/timer_form.dart';
+import 'package:flutter/services.dart';
 
 class NewTimer extends StatefulWidget {
-  const NewTimer({super.key});
+  final Function(String) onHoursChanged;
+  final Function(String) onMinutesChanged;
+  final Function(String) onSecondsChanged;
+  const NewTimer({
+    super.key,
+    required this.onHoursChanged,
+    required this.onMinutesChanged,
+    required this.onSecondsChanged,
+  });
 
   @override
   State<NewTimer> createState() => _NewTimerState();
 }
 
 class _NewTimerState extends State<NewTimer> {
+  late TextEditingController _hoursController;
+  late TextEditingController _minutesController;
+  late TextEditingController _secondsController;
+
+  @override
+  void initState() {
+    super.initState();
+    _hoursController = TextEditingController(text: '00');
+    _minutesController = TextEditingController(text: '30');
+    _secondsController = TextEditingController(text: '00');
+  }
+
+  @override
+  void dispose() {
+    _hoursController.dispose();
+    _minutesController.dispose();
+    _secondsController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final _modalFormKey = GlobalKey<FormState>();
+    final modalFormKey = GlobalKey<FormState>();
 
     final ColorScheme colors = Theme.of(context).colorScheme;
 
     final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
 
-    return Container(
-      padding: EdgeInsets.only(
-          top: 10,
-          left: 10,
-          right: 10,
-          bottom: MediaQuery.of(context).viewInsets.bottom + 10),
-      child: ListView(
-        children: [
-          Form(
-            key: _modalFormKey,
-            child: Column(children: [
-              // title
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'Add a preset timer',
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: colors.secondary,
-                    fontWeight: FontWeight.bold,
+    return Form(
+      key: modalFormKey,
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(10),
+        height: height * 0.08,
+        child: Center(
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            children: [
+              // hours form
+              Container(
+                padding: EdgeInsets.all(width * 0.03),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(6),
+                    color: colors.tertiary),
+                width: width * 0.14,
+                child: TextFormField(
+                  controller: _hoursController,
+                  decoration: InputDecoration.collapsed(
+                    hintText: 'HH',
+                    hintStyle: TextStyle(color: colors.secondary),
                   ),
+                  keyboardType: TextInputType.number,
+                  onChanged: (value) => widget.onHoursChanged(value),
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly,
+                    LengthLimitingTextInputFormatter(2),
+                  ],
                 ),
               ),
-              SizedBox(height: height * 0.02),
-              // time input form field
-              const TimerForm(),
-            ]),
+              const Text(':', style: TextStyle(fontSize: 20)),
+
+              // minutes form
+              Container(
+                padding: EdgeInsets.all(width * 0.03),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(6),
+                    color: colors.tertiary),
+                width: width * 0.14,
+                child: TextFormField(
+                  controller: _minutesController,
+                  decoration: InputDecoration.collapsed(
+                    hintText: 'MM',
+                    hintStyle: TextStyle(color: colors.secondary),
+                  ),
+                  keyboardType: TextInputType.number,
+                  onChanged: (value) => widget.onMinutesChanged(value),
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly,
+                    LengthLimitingTextInputFormatter(2),
+                  ],
+                ),
+              ),
+              const Text(':', style: TextStyle(fontSize: 20)),
+
+              // seconds form
+              Container(
+                padding: EdgeInsets.all(width * 0.03),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(6),
+                    color: colors.tertiary),
+                width: width * 0.14,
+                child: TextFormField(
+                  controller: _secondsController,
+                  decoration: InputDecoration.collapsed(
+                    hintText: 'SS',
+                    hintStyle: TextStyle(color: colors.secondary),
+                  ),
+                  keyboardType: TextInputType.number,
+                  onChanged: (value) => widget.onSecondsChanged(value),
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly,
+                    LengthLimitingTextInputFormatter(2),
+                  ],
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

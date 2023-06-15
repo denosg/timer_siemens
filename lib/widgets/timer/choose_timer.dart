@@ -29,7 +29,6 @@ class ChooseTimerState extends ConsumerState<ChooseTimer> {
 
   @override
   Widget build(BuildContext context) {
-    final timerState = ref.watch(countdownProvider);
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
 

@@ -1,19 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:timer_siemens/widgets/timer/preferred_timer.dart';
 
+import '../providers/preferred_timer.dart';
 import '../widgets/timer/choose_timer.dart';
 import '../widgets/timer/new_timer.dart';
 import '../providers/timer_provider.dart';
 import '../widgets/custom_drawer.dart';
 import '../widgets/timer/timer_button.dart';
 
-class TimerScreen extends ConsumerWidget {
+class TimerScreen extends ConsumerStatefulWidget {
   static const routeName = 'timer-screen';
   const TimerScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  TimerScreenState createState() => TimerScreenState();
+}
+
+class TimerScreenState extends ConsumerState<TimerScreen> {
+  String _hours = '00';
+  String _minutes = '30';
+  String _seconds = '00';
+
+  @override
+  void initState() {
+    super.initState();
+    // Load the preferred timers when the timer screen is loaded
+    ref.read(preferredTimerProvider.notifier).loadPreferredTimers();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final timerState = ref.watch(countdownProvider);
+    final prefTimerState = ref.watch(preferredTimerProvider);
 
     final height = MediaQuery.of(context).size.height;
 
@@ -35,7 +54,23 @@ class TimerScreen extends ConsumerWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            content: const NewTimer(),
+            content: NewTimer(
+              onHoursChanged: (value) {
+                setState(() {
+                  _hours = value;
+                });
+              },
+              onMinutesChanged: (value) {
+                setState(() {
+                  _minutes = value;
+                });
+              },
+              onSecondsChanged: (value) {
+                setState(() {
+                  _seconds = value;
+                });
+              },
+            ),
             // Options for the user regarding adding a timer
             actions: [
               TextButton(
@@ -52,7 +87,16 @@ class TimerScreen extends ConsumerWidget {
               ),
               TextButton(
                 // add the preset timer in the db + state management
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pop(false);
+                  int hours = int.parse(_hours);
+                  int minutes = int.parse(_minutes);
+                  int seconds = int.parse(_seconds);
+                  // adds the preferred timer here in the list
+                  ref
+                      .read(preferredTimerProvider.notifier)
+                      .addPreferredTimer(hours, minutes, seconds);
+                },
                 child: Text(
                   'Add',
                   style: TextStyle(
@@ -121,7 +165,20 @@ class TimerScreen extends ConsumerWidget {
                         ),
                       ),
               ),
-              SizedBox(height: height * 0.15),
+              // preview of preffered timers
+              SizedBox(
+                height: height * 0.15,
+                child: ListView.builder(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) => PrefTimer(
+                      index: index,
+                      hours: prefTimerState[index].hours,
+                      minutes: prefTimerState[index].minutes,
+                      seconds: prefTimerState[index].seconds),
+                  itemCount: prefTimerState.length,
+                ),
+              ),
               // buttons for timer
               const TimerButton(),
             ],
