@@ -4,7 +4,7 @@ import 'package:timer_siemens/widgets/timer/preferred_timer.dart';
 
 import '../providers/preferred_timer.dart';
 import '../widgets/timer/choose_timer.dart';
-import '../widgets/timer/new_timer.dart';
+import '../widgets/timer/new_pref_timer.dart';
 import '../providers/timer_provider.dart';
 import '../widgets/custom_drawer.dart';
 import '../widgets/timer/timer_button.dart';
