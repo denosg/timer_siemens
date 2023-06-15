@@ -124,9 +124,12 @@ class TimerScreenState extends ConsumerState<TimerScreen> {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadiusDirectional.circular(10)),
             itemBuilder: (context) => [
-              const PopupMenuItem(
+              PopupMenuItem(
                 value: 'addTimer',
-                child: Text('Add a preset timer'),
+                child: Text(
+                  'Add a preset timer',
+                  style: TextStyle(color: colors.secondary),
+                ),
               ),
             ],
             onSelected: (value) async {

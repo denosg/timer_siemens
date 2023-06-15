@@ -91,7 +91,9 @@ class StopWatchScreen extends ConsumerWidget {
                   SizedBox(width: width * 0.02),
                   IconButton(
                     // reads the stopwatchProvider method for adding the lap in the list ->
-                    onPressed: ref.read(stopwatchProvider.notifier).addLap,
+                    onPressed: !stopwatchState.started
+                        ? null
+                        : ref.read(stopwatchProvider.notifier).addLap,
                     color: colors.secondary,
                     icon: const Icon(Icons.flag),
                   ),

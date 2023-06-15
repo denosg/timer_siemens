@@ -16,6 +16,7 @@ class AppTheme {
         TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
       },
     ),
+    popupMenuTheme: const PopupMenuThemeData(color: Colors.white),
   );
   // dark theme
   static ThemeData darkTheme = ThemeData(
@@ -31,5 +32,7 @@ class AppTheme {
         TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
       },
     ),
+    popupMenuTheme: PopupMenuThemeData(
+        color: createMaterialColor(const Color.fromRGBO(10, 14, 18, 1))),
   );
 }
