@@ -22,6 +22,7 @@ class TimerScreen extends ConsumerWidget {
     // modal bottoom sheet when entering new item in the list
     void startAddNewtimer(BuildContext context) {
       showModalBottomSheet(
+        backgroundColor: colors.primary,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
