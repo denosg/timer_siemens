@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_riverpod: ^2.3.6
   timer_count_down: ^2.2.2
+  sqflite: ^2.2.8+4
 
 dev_dependencies:
   flutter_test:
