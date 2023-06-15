@@ -35,10 +35,11 @@ class TimerScreen extends ConsumerWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            content: NewTimer(),
+            content: const NewTimer(),
             // Options for the user regarding adding a timer
             actions: [
               TextButton(
+                //closes the dialog if the user cancels
                 onPressed: () => Navigator.of(context).pop(false),
                 child: Text(
                   'Cancel',
@@ -96,32 +97,35 @@ class TimerScreen extends ConsumerWidget {
       drawer: const CustomDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: colors.tertiary,
-              ),
-              height: height * 0.5,
-              child: !timerState.started
-                  ? const ChooseTimer()
-                  : Center(
-                      child: Text(
-                        '${timerState.displayHour}:${timerState.displayMin}:${timerState.displaySec}',
-                        style: TextStyle(
-                          color: colors.secondary,
-                          fontSize: 40,
-                          fontWeight: FontWeight.w600,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(height: height * 0.05),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: colors.tertiary,
+                ),
+                height: height * 0.5,
+                child: !timerState.started
+                    ? const ChooseTimer()
+                    : Center(
+                        child: Text(
+                          '${timerState.displayHour}:${timerState.displayMin}:${timerState.displaySec}',
+                          style: TextStyle(
+                            color: colors.secondary,
+                            fontSize: 40,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
-                    ),
-            ),
-            // buttons for timer
-            const TimerButton(),
-          ],
+              ),
+              SizedBox(height: height * 0.15),
+              // buttons for timer
+              const TimerButton(),
+            ],
+          ),
         ),
       ),
     );
