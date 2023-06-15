@@ -166,19 +166,21 @@ class TimerScreenState extends ConsumerState<TimerScreen> {
                       ),
               ),
               // preview of preffered timers
-              SizedBox(
-                height: height * 0.15,
-                child: ListView.builder(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) => PrefTimer(
-                      index: index,
-                      hours: prefTimerState[index].hours,
-                      minutes: prefTimerState[index].minutes,
-                      seconds: prefTimerState[index].seconds),
-                  itemCount: prefTimerState.length,
-                ),
-              ),
+              timerState.started
+                  ? SizedBox(height: height * 0.15)
+                  : SizedBox(
+                      height: height * 0.15,
+                      child: ListView.builder(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) => PrefTimer(
+                            index: index,
+                            hours: prefTimerState[index].hours,
+                            minutes: prefTimerState[index].minutes,
+                            seconds: prefTimerState[index].seconds),
+                        itemCount: prefTimerState.length,
+                      ),
+                    ),
               // buttons for timer
               const TimerButton(),
             ],
