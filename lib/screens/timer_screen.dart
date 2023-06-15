@@ -19,15 +19,51 @@ class TimerScreen extends ConsumerWidget {
 
     final ColorScheme colors = Theme.of(context).colorScheme;
 
-    // modal bottoom sheet when entering new item in the list
-    void startAddNewtimer(BuildContext context) {
-      showModalBottomSheet(
-        backgroundColor: colors.primary,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        ),
+    // alert dialog entering new item in the list
+    Future<void> showDiagContext() async {
+      showDialog(
         context: context,
-        builder: (context) => const NewTimer(),
+        builder: (context) {
+          return AlertDialog(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            title: Text(
+              'Add preset timer',
+              style: TextStyle(
+                fontSize: 20,
+                color: colors.secondary,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            content: NewTimer(),
+            // Options for the user regarding adding a timer
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: Text(
+                  'Cancel',
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: colors.secondary,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              TextButton(
+                // add the preset timer in the db + state management
+                onPressed: () {},
+                child: Text(
+                  'Add',
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: colors.secondary,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              )
+            ],
+          );
+        },
       );
     }
 
@@ -48,9 +84,9 @@ class TimerScreen extends ConsumerWidget {
                 child: Text('Add a preset timer'),
               ),
             ],
-            onSelected: (value) {
+            onSelected: (value) async {
               if (value == 'addTimer') {
-                startAddNewtimer(context);
+                showDiagContext();
               }
             },
           ),

@@ -39,7 +39,6 @@ class CountdownNotifier extends StateNotifier<CountdownState> {
       int localHour = state.hours;
       // add all seconds to see how much total seconds we have
       int totalSeconds = localSeconds + localMinutes * 60 + localHour * 3600;
-      print("sec $totalSeconds");
       // we substract here 1 second for the countdown
       totalSeconds--;
       // verifies if we have reached the end
