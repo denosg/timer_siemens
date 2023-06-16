@@ -51,6 +51,14 @@ class PreferredTimerNotifier extends StateNotifier<List<PreferredTimer>> {
     loadPreferredTimers();
   }
 
+  // deletes the timer by index and updates the state of the list
+  void deletePrefferedTimerByIndex(int index) async {
+    // deletes the timer also from memory
+    await DatabaseHelper.instance.deletePreferredTimerByIndex(index);
+    //updates the ui
+    state = [...state]..removeAt(index);
+  }
+
   // method for loading the preferredtimers
   Future<void> loadPreferredTimers() async {
     final timers = await DatabaseHelper.instance.getPreferredTimers();
