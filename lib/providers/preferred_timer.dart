@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../helper/db_helper.dart';
 
@@ -49,6 +52,22 @@ class PreferredTimerNotifier extends StateNotifier<List<PreferredTimer>> {
   PreferredTimerNotifier() : super([]) {
     // load the preferredtimers from phone memory (if there are any)
     loadPreferredTimers();
+  }
+
+  // saves the timer in a file (the task from Cristoph)
+  void downloadPreferredTimersToFile() async {
+    const String fileName = 'preferred_timers.txt';
+    final String directory = (await getExternalStorageDirectory())!.path;
+    final String filePath = '$directory/$fileName';
+    final File file = File(filePath);
+
+    final StringBuffer buffer = StringBuffer();
+    for (final timer in state) {
+      buffer.writeln(
+          'Hours: ${timer.hours}, Minutes: ${timer.minutes}, Seconds: ${timer.seconds}');
+    }
+
+    await file.writeAsString(buffer.toString());
   }
 
   // deletes the timer by index and updates the state of the list
