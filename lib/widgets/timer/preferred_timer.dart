@@ -17,11 +17,9 @@ class PrefTimer extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final prefferedTimerState = ref.watch(preferredTimerProvider);
-
     final ColorScheme colors = Theme.of(context).colorScheme;
 
-    String _getDisplayValue(int value) {
+    String getDisplayValue(int value) {
       return (value >= 10) ? "$value" : "0$value";
     }
 
@@ -65,7 +63,6 @@ class PrefTimer extends ConsumerWidget {
 
     return InkWell(
       // long pressing on the item deletes the preffered timer
-      // TODO: create alert dialog for it do display
       onLongPress: showAlertDialog,
       child: Padding(
         padding: const EdgeInsets.all(10),
@@ -83,7 +80,7 @@ class PrefTimer extends ConsumerWidget {
             child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               // hours
               Text(
-                _getDisplayValue(hours),
+                getDisplayValue(hours),
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -94,7 +91,7 @@ class PrefTimer extends ConsumerWidget {
               const Text(":"),
               //minutes
               Text(
-                _getDisplayValue(minutes),
+                getDisplayValue(minutes),
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -105,7 +102,7 @@ class PrefTimer extends ConsumerWidget {
               const Text(":"),
               //seconds
               Text(
-                _getDisplayValue(seconds),
+                getDisplayValue(seconds),
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
