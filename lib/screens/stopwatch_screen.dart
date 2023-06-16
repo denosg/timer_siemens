@@ -13,11 +13,14 @@ class StopWatchScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // gets the state from the stopwatch_provider with ref (Riverpod)
     final stopwatchState = ref.watch(stopwatchProvider);
 
+    // gets device size
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
 
+    // gets the theme colors for easier use
     final ColorScheme colors = Theme.of(context).colorScheme;
 
     return Scaffold(
@@ -26,6 +29,7 @@ class StopWatchScreen extends ConsumerWidget {
         elevation: 0,
         iconTheme: IconThemeData(color: colors.secondary),
       ),
+      // custom drawer to show the screens
       drawer: const CustomDrawer(),
       backgroundColor: colors.primary,
       body: SafeArea(
@@ -58,6 +62,7 @@ class StopWatchScreen extends ConsumerWidget {
                   ),
                 ),
               ),
+              // this is the area of laps
               Container(
                 // half the size of the screen
                 height: height * 0.5,
@@ -76,7 +81,7 @@ class StopWatchScreen extends ConsumerWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  // start button ->
+                  // start / stop button ->
                   LogicButton(
                     text: stopwatchState.started ? 'stop' : 'start',
                     callBackFunc: () {

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class LapWidget extends StatefulWidget {
@@ -23,6 +22,7 @@ class _LapWidgetState extends State<LapWidget>
       vsync: this,
       duration: const Duration(milliseconds: 300),
     );
+    // opacity animation
     _animation = Tween<double>(begin: 0.0, end: 1.0).animate(_controller);
     _controller.forward();
   }
@@ -48,6 +48,7 @@ class _LapWidgetState extends State<LapWidget>
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
+                // shows Lap[index]: hours:minutes:seconds
                 Text(
                   'Lap: ${widget.index + 1}: ',
                   style: TextStyle(
@@ -55,6 +56,7 @@ class _LapWidgetState extends State<LapWidget>
                     fontSize: 16.0,
                   ),
                 ),
+                // time widget (open_file: ^3.3.2)
                 Text(
                   widget.time,
                   style: TextStyle(
