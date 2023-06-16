@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart' as path;
-import 'package:permission_handler/permission_handler.dart';
 import 'package:open_file/open_file.dart';
 
 import '../helper/db_helper.dart';

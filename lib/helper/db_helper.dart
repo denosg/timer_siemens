@@ -1,4 +1,5 @@
 import 'package:sqflite/sqflite.dart' as sql;
+// ignore: depend_on_referenced_packages
 import 'package:path/path.dart' as p;
 
 import '../providers/preferred_timer.dart';
