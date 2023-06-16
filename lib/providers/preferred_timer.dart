@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:path_provider/path_provider.dart' as path;
+import 'package:permission_handler/permission_handler.dart';
+import 'package:open_file/open_file.dart';
 
 import '../helper/db_helper.dart';
 
@@ -57,17 +59,32 @@ class PreferredTimerNotifier extends StateNotifier<List<PreferredTimer>> {
   // saves the timer in a file (the task from Cristoph)
   void downloadPreferredTimersToFile() async {
     const String fileName = 'preferred_timers.txt';
-    final String directory = (await getExternalStorageDirectory())!.path;
-    final String filePath = '$directory/$fileName';
-    final File file = File(filePath);
+    final appDocumentsDirectory = await path.getApplicationDocumentsDirectory();
+    final filePath = '${appDocumentsDirectory.path}/$fileName';
+    final file = File(filePath);
 
-    final StringBuffer buffer = StringBuffer();
+    final buffer = StringBuffer();
     for (final timer in state) {
       buffer.writeln(
           'Hours: ${timer.hours}, Minutes: ${timer.minutes}, Seconds: ${timer.seconds}');
     }
 
-    await file.writeAsString(buffer.toString());
+    // Save the file in the app's private storage
+    try {
+      await file.writeAsString(buffer.toString());
+      print('File saved successfully!');
+      print('File path: ${file.path}');
+    } catch (e) {
+      print('Error saving file: $e');
+      return;
+    }
+
+    // Use SAF to prompt the user to choose a location to save the file
+    final downloadsDirectory = await path.getExternalStorageDirectory();
+    final savedFile = await file.copy('${downloadsDirectory!.path}/$fileName');
+
+    // Open the saved file using a file viewer app
+    OpenFile.open(savedFile.path);
   }
 
   // deletes the timer by index and updates the state of the list
