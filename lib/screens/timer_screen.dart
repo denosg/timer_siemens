@@ -131,10 +131,24 @@ class TimerScreenState extends ConsumerState<TimerScreen> {
                   style: TextStyle(color: colors.secondary),
                 ),
               ),
+              PopupMenuItem(
+                value: 'downloadTimers',
+                child: Text(
+                  'Download timers',
+                  style: TextStyle(color: colors.secondary),
+                ),
+              ),
             ],
             onSelected: (value) async {
+              // shows the dialog context for adding a preffered timer
               if (value == 'addTimer') {
                 showDiagContext();
+              }
+              // downloads the timers to a .txt file
+              if (value == 'downloadTimers') {
+                ref
+                    .read(preferredTimerProvider.notifier)
+                    .downloadPreferredTimersToFile();
               }
             },
           ),
