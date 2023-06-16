@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+// new pref timer alert dialog content
 class NewTimer extends StatefulWidget {
   final Function(String) onHoursChanged;
   final Function(String) onMinutesChanged;

@@ -18,6 +18,7 @@ class TimerScreen extends ConsumerStatefulWidget {
 }
 
 class TimerScreenState extends ConsumerState<TimerScreen> {
+  // initial show for time
   String _hours = '00';
   String _minutes = '30';
   String _seconds = '00';
@@ -31,6 +32,7 @@ class TimerScreenState extends ConsumerState<TimerScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // gets the state from the timer_provider and preffered_timer with ref (Riverpod)
     final timerState = ref.watch(countdownProvider);
     final prefTimerState = ref.watch(preferredTimerProvider);
 
@@ -38,7 +40,7 @@ class TimerScreenState extends ConsumerState<TimerScreen> {
 
     final ColorScheme colors = Theme.of(context).colorScheme;
 
-    // alert dialog entering new item in the list
+    // alert dialog for entering new item in the list
     Future<void> showDiagContext() async {
       showDialog(
         context: context,
@@ -46,6 +48,7 @@ class TimerScreenState extends ConsumerState<TimerScreen> {
           return AlertDialog(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            // title of dialog
             title: Text(
               'Add preset timer',
               style: TextStyle(
@@ -54,6 +57,7 @@ class TimerScreenState extends ConsumerState<TimerScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            // NewTimer form
             content: NewTimer(
               onHoursChanged: (value) {
                 setState(() {
@@ -118,12 +122,13 @@ class TimerScreenState extends ConsumerState<TimerScreen> {
         elevation: 0,
         iconTheme: IconThemeData(color: colors.secondary),
         actions: [
-          // add a favorite preset
+          // add a favorite preset + Download timers buttons
           PopupMenuButton(
             offset: const Offset(0, 20),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadiusDirectional.circular(10)),
             itemBuilder: (context) => [
+              // button for adding fav preset
               PopupMenuItem(
                 value: 'addTimer',
                 child: Text(
@@ -131,6 +136,7 @@ class TimerScreenState extends ConsumerState<TimerScreen> {
                   style: TextStyle(color: colors.secondary),
                 ),
               ),
+              // button for downloading pref timers
               PopupMenuItem(
                 value: 'downloadTimers',
                 child: Text(
@@ -144,7 +150,7 @@ class TimerScreenState extends ConsumerState<TimerScreen> {
               if (value == 'addTimer') {
                 showDiagContext();
               }
-              // downloads the timers to a .txt file
+              // downloads the timers to  preffered_timers.txt file in the apps folder
               if (value == 'downloadTimers') {
                 ref
                     .read(preferredTimerProvider.notifier)
@@ -170,7 +176,9 @@ class TimerScreenState extends ConsumerState<TimerScreen> {
                 ),
                 height: height * 0.5,
                 child: !timerState.started
+                    // if the timer didnt start, we have the choose timer wheel
                     ? const ChooseTimer()
+                    // else we have the timer countdown
                     : Center(
                         child: Text(
                           '${timerState.displayHour}:${timerState.displayMin}:${timerState.displaySec}',

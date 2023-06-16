@@ -19,7 +19,7 @@ class PreferredTimer {
   final String displayMin;
   final String displayHour;
 
-  //pre-made choices for when the newTimer pops
+  //pre-made choices for when the newTimer pops up
   PreferredTimer({
     this.seconds = 0,
     this.minutes = 30,
@@ -78,7 +78,7 @@ class PreferredTimerNotifier extends StateNotifier<List<PreferredTimer>> {
       return;
     }
 
-    // Use SAF to prompt the user to choose a location to save the file
+    // Use SAF (Storage Access Framework) to prompt the user to choose a location to save the file
     final downloadsDirectory = await path.getExternalStorageDirectory();
     final savedFile = await file.copy('${downloadsDirectory!.path}/$fileName');
 

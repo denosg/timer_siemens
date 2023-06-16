@@ -42,10 +42,12 @@ class PrefTimer extends ConsumerWidget {
                 style: TextStyle(color: colors.secondary)),
             // Options for the user regarding deleting a timer
             actions: [
+              // NO -> closes the alert dialog
               TextButton(
                 onPressed: () => Navigator.of(context).pop(false),
                 child: Text('No', style: TextStyle(color: colors.secondary)),
               ),
+              // YES -> closes the alert dialog + deletes the pref timer from db + local memory
               TextButton(
                 onPressed: () {
                   ref
@@ -87,7 +89,6 @@ class PrefTimer extends ConsumerWidget {
                   color: colors.secondary,
                 ),
               ),
-              //separator
               const Text(":"),
               //minutes
               Text(
@@ -98,7 +99,6 @@ class PrefTimer extends ConsumerWidget {
                   color: colors.secondary,
                 ),
               ),
-              //separator
               const Text(":"),
               //seconds
               Text(

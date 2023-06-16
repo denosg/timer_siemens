@@ -22,6 +22,7 @@ class ChooseTimerState extends ConsumerState<ChooseTimer> {
   void initState() {
     super.initState();
 
+    // initialize the controller with typical values
     _secondsController = FixedExtentScrollController(initialItem: 0);
     _minutesController = FixedExtentScrollController(initialItem: 30);
     _hoursController = FixedExtentScrollController(initialItem: 0);
@@ -43,6 +44,7 @@ class ChooseTimerState extends ConsumerState<ChooseTimer> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
+              // hours
               Text(
                 'Hours',
                 style: TextStyle(
@@ -51,6 +53,7 @@ class ChooseTimerState extends ConsumerState<ChooseTimer> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              // minutes
               Text(
                 'Minutes',
                 style: TextStyle(
@@ -59,6 +62,7 @@ class ChooseTimerState extends ConsumerState<ChooseTimer> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              // seconds
               Text(
                 'Seconds',
                 style: TextStyle(

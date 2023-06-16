@@ -21,16 +21,6 @@ class DatabaseHelper {
     return _database!;
   }
 
-  // method for deleting a preffered timer by index
-  Future<void> deletePreferredTimerByIndex(int index) async {
-    final db = await instance.database;
-    await db.delete(
-      'preferred_timers',
-      where: 'id = ?',
-      whereArgs: [index + 1], // SQLite uses 1-based indexing for primary keys
-    );
-  }
-
   // method for initialising the database
   Future<sql.Database> _initDatabase() async {
     // gets the path of the db
@@ -85,6 +75,16 @@ class DatabaseHelper {
         'minutes': timer.minutes,
         'seconds': timer.seconds,
       },
+    );
+  }
+
+  // method for deleting a preffered timer by index
+  Future<void> deletePreferredTimerByIndex(int index) async {
+    final db = await instance.database;
+    await db.delete(
+      'preferred_timers',
+      where: 'id = ?',
+      whereArgs: [index + 1], // SQLite uses 1-based indexing for primary keys
     );
   }
 
