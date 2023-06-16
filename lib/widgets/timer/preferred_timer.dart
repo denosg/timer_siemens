@@ -25,12 +25,48 @@ class PrefTimer extends ConsumerWidget {
       return (value >= 10) ? "$value" : "0$value";
     }
 
+    void showAlertDialog() {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            backgroundColor: colors.tertiary,
+            elevation: 20,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            title: Text('Are you sure ?',
+                style: TextStyle(
+                  color: colors.secondary,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                )),
+            content: Text('Do you want to remove your timer ?',
+                style: TextStyle(color: colors.secondary)),
+            // Options for the user regarding deleting a timer
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: Text('No', style: TextStyle(color: colors.secondary)),
+              ),
+              TextButton(
+                onPressed: () {
+                  ref
+                      .read(preferredTimerProvider.notifier)
+                      .deletePrefferedTimerByIndex(index);
+                  Navigator.of(context).pop();
+                },
+                child: Text('Yes', style: TextStyle(color: colors.secondary)),
+              )
+            ],
+          );
+        },
+      );
+    }
+
     return InkWell(
       // long pressing on the item deletes the preffered timer
       // TODO: create alert dialog for it do display
-      onLongPress: () => ref
-          .read(preferredTimerProvider.notifier)
-          .deletePrefferedTimerByIndex(index),
+      onLongPress: showAlertDialog,
       child: Padding(
         padding: const EdgeInsets.all(10),
         child: Container(
@@ -56,6 +92,7 @@ class PrefTimer extends ConsumerWidget {
               ),
               //separator
               const Text(":"),
+              //minutes
               Text(
                 _getDisplayValue(minutes),
                 style: TextStyle(
@@ -66,6 +103,7 @@ class PrefTimer extends ConsumerWidget {
               ),
               //separator
               const Text(":"),
+              //seconds
               Text(
                 _getDisplayValue(seconds),
                 style: TextStyle(
