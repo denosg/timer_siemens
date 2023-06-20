@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:timer_siemens/helper/db_helper.dart';
 import 'package:timer_siemens/providers/preferred_timer.dart';
 import 'package:timer_siemens/providers/timer_provider.dart';
 
@@ -77,7 +76,7 @@ class PrefTimer extends ConsumerWidget {
     return InkWell(
       // long pressing on the item deletes the preffered timer
       onLongPress: showAlertDialog,
-      // onTap starts the preset timer chosen on the screen TODO: implement here ->
+      // onTap starts the preset timer chosen on the screen
       onTap: () => startPresetTimer(seconds, minutes, hours),
       child: Padding(
         padding: const EdgeInsets.all(10),
