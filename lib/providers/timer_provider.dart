@@ -80,7 +80,6 @@ class CountdownNotifier extends StateNotifier<CountdownState> {
   // stop countdown function ->
   void stopCountdown() {
     _timer?.cancel();
-    state = state.copyWith(started: false);
   }
 
   // reset countdown function ->
