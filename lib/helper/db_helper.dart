@@ -78,14 +78,20 @@ class DatabaseHelper {
     );
   }
 
-  // method for deleting a preffered timer by index
+  // method for deleting a preferred timer by index
   Future<void> deletePreferredTimerByIndex(int index) async {
     final db = await instance.database;
+
+    // Delete the item with the specified index
     await db.delete(
       'preferred_timers',
       where: 'id = ?',
       whereArgs: [index + 1], // SQLite uses 1-based indexing for primary keys
     );
+
+    // Update the IDs of the remaining items
+    await db.rawQuery(
+        'UPDATE preferred_timers SET id = id - 1 WHERE id > ?', [index + 1]);
   }
 
   // drops the db (ONLY IF NECESSARY)
