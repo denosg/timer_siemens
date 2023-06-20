@@ -32,7 +32,7 @@ class CountdownNotifier extends StateNotifier<CountdownState> {
   void startCountdown() {
     if (state.started) return;
 
-    state = state.copyWith(started: true);
+    state = state.copyWith(started: true, showDiffButt: true);
     _timer = Timer.periodic(const Duration(seconds: 1), (_) {
       int localSeconds = state.seconds;
       int localMinutes = state.minutes;
@@ -46,6 +46,7 @@ class CountdownNotifier extends StateNotifier<CountdownState> {
         //if we reach the end, we start with the 30 min again if the user just presses it again (bug fix)
         state = state.copyWith(
             started: false,
+            showDiffButt: false,
             minutes: 30,
             displayMin: '30',
             seconds: 0,
@@ -80,6 +81,7 @@ class CountdownNotifier extends StateNotifier<CountdownState> {
   // stop countdown function ->
   void stopCountdown() {
     _timer?.cancel();
+    state = state.copyWith(started: false, showDiffButt: true);
   }
 
   // reset countdown function ->
@@ -97,6 +99,7 @@ class CountdownState {
   final String displayMin;
   final String displayHour;
   final bool started;
+  final bool showDiffButt;
 
   CountdownState({
     this.seconds = 0,
@@ -106,6 +109,7 @@ class CountdownState {
     this.displayMin = '30',
     this.displayHour = '00',
     this.started = false,
+    this.showDiffButt = false,
   });
 
   CountdownState copyWith({
@@ -116,6 +120,7 @@ class CountdownState {
     String? displayMin,
     String? displayHour,
     bool? started,
+    bool? showDiffButt,
     List<String>? laps,
   }) {
     return CountdownState(
@@ -126,6 +131,7 @@ class CountdownState {
       displayMin: displayMin ?? this.displayMin,
       displayHour: displayHour ?? this.displayHour,
       started: started ?? this.started,
+      showDiffButt: showDiffButt ?? this.showDiffButt,
     );
   }
 }

@@ -175,7 +175,7 @@ class TimerScreenState extends ConsumerState<TimerScreen> {
                   color: colors.tertiary,
                 ),
                 height: height * 0.5,
-                child: !timerState.started
+                child: !timerState.started && !timerState.showDiffButt
                     // if the timer didnt start, we have the choose timer wheel
                     ? const ChooseTimer()
                     // else we have the timer countdown
@@ -191,7 +191,7 @@ class TimerScreenState extends ConsumerState<TimerScreen> {
                       ),
               ),
               // preview of preffered timers
-              timerState.started
+              timerState.showDiffButt
                   ? SizedBox(height: height * 0.15)
                   : SizedBox(
                       height: height * 0.15,

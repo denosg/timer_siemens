@@ -13,7 +13,8 @@ class TimerButton extends ConsumerWidget {
     final ColorScheme colors = Theme.of(context).colorScheme;
 
     final double width = MediaQuery.of(context).size.width;
-    return timerState.started
+    return timerState.showDiffButt
+        // this shows when the timer started = true and show diff butt = true
         ? Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -24,7 +25,7 @@ class TimerButton extends ConsumerWidget {
                     borderRadius: BorderRadius.circular(20),
                     color: colors.tertiary),
                 child: IconButton(
-                  // stop timer metod
+                  // reset timer metod
                   onPressed: () {
                     ref.read(countdownProvider.notifier).resetCountdown();
                   },
@@ -33,20 +34,39 @@ class TimerButton extends ConsumerWidget {
               ),
               SizedBox(width: width * 0.15),
               // pause timer button
-              Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: colors.tertiary, // Set the desired background color
-                ),
-                child: IconButton(
-                  // pause timer metod
-                  onPressed: () {
-                    ref.read(countdownProvider.notifier).stopCountdown();
-                  },
-                  icon: const Icon(Icons.pause, size: 32),
-                ),
-              ),
+              timerState.started && timerState.showDiffButt
+                  // this shows when the timer started = true and show diff butt = true
+                  ? Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color:
+                            colors.tertiary, // Set the desired background color
+                      ),
+                      child: IconButton(
+                        // pause timer metod
+                        onPressed: () {
+                          ref.read(countdownProvider.notifier).stopCountdown();
+                        },
+                        icon: const Icon(Icons.pause, size: 32),
+                      ),
+                    )
+                  // this shows when the timer started = false and show diff butt = true
+                  : Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color:
+                            colors.tertiary, // Set the desired background color
+                      ),
+                      child: IconButton(
+                        // start timer metod
+                        onPressed: () {
+                          ref.read(countdownProvider.notifier).startCountdown();
+                        },
+                        icon: const Icon(Icons.play_circle_filled, size: 32),
+                      ),
+                    ),
             ],
           )
         // start timer button
